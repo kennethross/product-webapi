@@ -1,9 +1,16 @@
 var Products = require('../models/productModel');
 var bodyParser = require('body-parser');
+var middleware = require('../controllers/middleware');
 
 module.exports = function (app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  app.get('/api/products', middleware.authenticateJWTauthenticateJWT, function(req, res) {
+    Products.find({}, function(err, product) {
+      res.send(product);
+    })
+  })
 
   app.get('/api/products/:owner', function (req, res) {
     Products.find({ owner: req.params.owner }, function (err, product) {

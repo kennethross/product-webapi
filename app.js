@@ -3,8 +3,8 @@ var app = express();
 var mongoose = require('mongoose');
 var config = require('./config');
 
-var setupController = require('./controllers/setupControllers');
 var apiController = require('./controllers/apiControllers');
+var authController = require('./controllers/authController');
 
 // Setting the PORT Environment
 var port = process.env.PORT || 3000;
@@ -16,6 +16,11 @@ app.set('view engine', 'ejs');
 // Mongoose connecting
 mongoose.connect(config.getDbConnectionString(), { useNewUrlParser: true });
 
-setupController(app);
+authController(app);
 apiController(app);
+
+app.get('*', function(req, res){
+  res.send('Sorry, this is an invalid URL.');
+});
+
 app.listen(port); 

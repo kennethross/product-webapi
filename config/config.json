@@ -1,5 +1,6 @@
 {
   "uname": "test_user",
   "pwd": "test1234",
-  "cluster": "ClusterK"
+  "cluster": "ClusterK",
+  "accessTokenSecret":"youraccesstokensecret"
 }
